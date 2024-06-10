@@ -1,0 +1,19 @@
+GOFILES := $(shell find ./ -type f -name '*.go' -not -path "./vendor/*")
+GO_MODULE:=$(shell go list -m)
+GOPACKAGES:=$(shell go list ./... )
+GOMODCACHE:= $(shell go env GOMODCACHE)
+
+
+
+#####
+
+
+
+GOLANG_PHONY:= dependencies test default_target usage
+
+GOLANG_ALL:= test
+
+test:
+	go fmt $(GOPACKAGES)
+	go vet $(GOPACKAGES)
+	go test -v -cover -race $(GOPACKAGES)
